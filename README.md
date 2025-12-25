@@ -1,44 +1,59 @@
-# 🚕🌱 EquiRide Surge AI  
-### Fair & Sustainable Ride Repositioning System
+# 🧠🏥 Neuro-ICU Early Deterioration Prediction  
+### Multimodal Temporal Modeling for Early Ventilation Risk
 
-**EquiRide Surge AI** is an intelligent ride-hailing optimization platform that predicts **hyperlocal demand surges** and proactively reallocates drivers to balance **profitability, fairness, and environmental sustainability**. The system addresses supply–demand mismatches that lead to long wait times, unfair driver earnings, and increased carbon emissions from inefficient cruising.
-
----
-
-## 🚀 Key Features
-- **Hyperlocal Demand Forecasting:** Micro-zone (500m–1km) demand prediction for fine-grained spatial accuracy.
-- **Hybrid Model Architecture:** Combines **LightGBM** for tabular learning with **Graph WaveNet** for spatial-temporal modeling.
-- **Fairness-Aware Optimization:** Multi-objective optimization using the **Hungarian Algorithm** to balance profit, emissions, and driver equity.
-- **Real-Time Driver Alerts:** Automated surge alerts triggered by a **2-sigma threshold**, delivered via **Twilio SMS**.
-- **Interactive Dashboards:** Actionable insights for drivers and operators to enable smarter urban mobility decisions.
+This project implements a specialized deep-learning framework to **predict early clinical deterioration in Neuro-ICU patients**, specifically the need for **invasive mechanical ventilation within 12 hours of admission**. Unlike generic early-warning systems, the model captures **neurology-specific physiological and documentation patterns** to support timely, targeted clinical intervention.
 
 ---
 
-## 🛠️ Tech Stack & Methodology
-- **Machine Learning:** LightGBM, Graph WaveNet, ST-GCN  
-- **Operational Research:** Hungarian Algorithm  
-- **Communication:** Twilio API  
-- **Development:** Modular Python codebase with scalable APIs  
+## 🚀 Overview
+Early detection of deterioration in the Neuro-ICU is critical, as subtle changes in consciousness or respiration can signal severe complications. This repository presents a **gated multimodal deep-learning approach** that integrates diverse data sources collected during the **first 6 hours of admission**.
 
 ---
 
-## 📊 Performance Metrics
-Experimental evaluation on simulated spatio-temporal datasets shows significant improvements:
+## 🧠 Key Methodology
+- **Specialized Cohort:** Neuro-ICU patient subset from the **MIMIC-IV** database.
+- **Multimodal Fusion:** Gated Multimodal Unit (GMU) dynamically fuses static, temporal, and textual features.
+- **Clinical Calibration:** **Isotonic Regression** improves probability reliability and clinical trust.
+- **Interpretability:** **SHAP** provides transparent global and patient-level explanations.
 
-- **Graph WaveNet (Final):** Test MAE = **34.28**
-- **ST-GCN (Baseline):** Test MAE = **47.59**
-- **LightGBM (Standalone):** Test MAE = **47.51**
+---
+
+## 🛠️ Project Modules
+
+### 1️⃣ Data Preprocessing (`preprocessing.ipynb`)
+- Extracts and cleans MIMIC-IV data  
+- Processes static demographics, vitals, and lab results  
+- Prepares clinical text for embedding  
+
+### 2️⃣ Temporal Encoder (`Temporal_encoder_module.ipynb`)
+- Models first-6-hour vitals and labs  
+- Captures early physiological trends using deep sequence modeling  
+
+### 3️⃣ Textual Embeddings (`BIO+CLINICALBERT.ipynb`)
+- Uses **Bio+ClinicalBERT** for clinical notes and radiology reports  
+- Captures semantic clinical context absent in structured data  
+
+### 4️⃣ Gated Multimodal Fusion (`fusion_model.ipynb`)
+- Integrates static, temporal, and textual representations  
+- Gating mechanism prioritizes patient-specific risk signals  
+
+### 5️⃣ Metrics & Interpretability (`Outputs/`)
+- **Evaluation:** ROC-AUC, Precision-Recall, Brier Score  
+- **Calibration:** Isotonic regression plots  
+- **Explainability:** SHAP global and local explanations (top 30 features)
+
+---
+
+## 📊 Key Findings
+- **Feature Importance:** Early respiratory trends, radiology documentation, and neuro-specific static features dominate risk prediction.
+- **Reliability:** Post-hoc calibration significantly improves probability accuracy for real-time clinical use.
 
 ---
 
 ## 👥 Contributors
+- **Dhatri P Sriram**  
+- **Namratha A**  
+- **Bhumika L**  
+- **Harshini H**  
 
-- **Dhatri P Sriram**
-- **Harshini H** 
-- **Namratha A** 
-- **Bhumika L** 
-
----
-
-## 📜 License
-This project is released for academic and research purposes.
+Developed as part of the **Advanced Foundations for Machine Learning** course at **PES University**.
